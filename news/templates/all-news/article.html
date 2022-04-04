@@ -1,11 +1,10 @@
 {%extends 'all-news/base.html'%}
 
  {% block content %}
-<br>
-<br>
+
  <div class="container">
 
-   <!-- <div class="row">
+   <div class="row">
      <img src="{{article.article_image.url}}"  class="img-responsive" alt="">
    </div>
 
@@ -14,24 +13,16 @@
    </div>
 
    <div class="row">
-     <p>{{article.post}}</p>
+     {% autoescape on %}
+     {{article.post| safe}}
+    {% endautoescape %}
+
    </div>
 
    <div class="row">
      <p>Posted {{article.pub_date|timesince}} by {{article.editor.first_name}}</p>
-   </div> -->
-   <div class="card justify-content-center" style="width: 30%;margin-left: 200px;">
-    <img src="{{article.article_image.url}}"  class="img-responsive" alt="">
-    <div class="card-body">
-        <h1 class="text-center">{{article.title}}</h1>
-        <p>{{article.post}}</p>
-    </div>
-  
-  </div>
+   </div>
 
  </div>
- <br>
- <br>
-
 
  {% endblock %}

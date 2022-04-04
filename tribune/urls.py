@@ -14,14 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
-# from django.conf.urls import url,include
+from django.urls import path,include,re_path
+
+from django_registration.backends.one_step.views import RegistrationView
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
     path('',include('news.urls')),
     path('admin/', admin.site.urls),
-
-   
-
+    re_path(r'^tinymce/', include('tinymce.urls')),
+    # path('accounts/', include('django.contrib.auth.urls')),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='all-news/password/password_reset_done.html'), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="all-news/password/password_reset_confirm.html"), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='all-news/password/password_reset_complete.html'), name='password_reset_complete'), 
+  
 ]
